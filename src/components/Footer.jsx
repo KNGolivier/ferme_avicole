@@ -1,142 +1,84 @@
-import React from "react";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaWhatsapp,
-  FaPhoneAlt,
-  FaMapMarkerAlt,
-  FaEnvelope,
-  FaClock,
-  FaCheckCircle,
-} from "react-icons/fa";
-import logo from "../assets/logo.png";
+import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { LuArrowUp, LuArrowUpRight } from "react-icons/lu";
+import Logo from "./ui/Logo";
+import { ADDRESS, EMAIL, HOURS, NAV_LINKS, PHONE_DISPLAY, PHONE_TEL, SOCIALS, whatsappLink } from "../data/site";
+
+const SOCIAL_ICONS = { facebook: FaFacebookF, instagram: FaInstagram };
 
 export default function Footer() {
   return (
-    <footer className="bg-[#3B2415] text-white">
-      <div className="max-w-[1240px] mx-auto px-4 md:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 xl:grid-cols-[1.15fr_0.9fr_1fr_1fr] gap-8 xl:gap-0 py-8 md:py-10">
-          {/* Col 1 */}
-          <div className="xl:pr-10 xl:border-r xl:border-white/20">
-            <img
-              src={logo}
-              alt="Logo La Marcadèle"
-              className="w-[72px] md:w-[82px] h-auto object-contain"
-            />
+    <footer className="relative overflow-hidden bg-earth-950 text-white">
+      <div className="grain pointer-events-none absolute inset-0 opacity-50" aria-hidden="true" />
 
-            <p className="mt-4 text-white/80 leading-7 text-[14px] max-w-[250px]">
-              Ferme Avicole La Marcadèle, votre partenaire de confiance pour une
-              alimentation saine et locale.
+      <div className="container-site relative">
+        {/* Appel à l'action */}
+        <div className="flex flex-col items-start justify-between gap-8 border-b border-white/10 py-16 md:flex-row md:items-center md:py-20">
+          <h2 className="max-w-[640px] font-display text-[36px] font-semibold leading-[1.05] tracking-[-0.02em] md:text-[54px]">
+            Des produits frais, <span className="italic text-yolk-400">livrés chez vous.</span>
+          </h2>
+          <a href={whatsappLink()} target="_blank" rel="noreferrer" className="btn-yolk shrink-0 !px-7 !py-4 text-[16px]">
+            <FaWhatsapp className="text-[20px]" /> Commander maintenant
+          </a>
+        </div>
+
+        <div className="grid gap-12 py-14 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.2fr]">
+          <div>
+            <div className="flex items-center gap-3">
+              <Logo className="h-14 w-14" />
+              <span className="font-display text-[22px] font-semibold">La Marcadèle</span>
+            </div>
+            <p className="mt-5 max-w-[320px] text-[14.5px] leading-7 text-white/60">
+              Ferme Avicole La Marcadèle, votre partenaire de confiance pour une alimentation saine et locale.
             </p>
-
-            <div className="mt-5 flex items-center gap-2.5">
-              <a
-                href="#"
-                className="w-9 h-9 rounded-full border border-white/25 flex items-center justify-center hover:bg-white/10 transition"
-              >
-                <FaFacebookF className="text-[13px]" />
-              </a>
-              <a
-                href="#"
-                className="w-9 h-9 rounded-full border border-white/25 flex items-center justify-center hover:bg-white/10 transition"
-              >
-                <FaInstagram className="text-[13px]" />
-              </a>
-              <a
-                href="#"
-                className="w-9 h-9 rounded-full border border-white/25 flex items-center justify-center hover:bg-white/10 transition"
-              >
-                <FaWhatsapp className="text-[13px]" />
+            <div className="mt-6 flex gap-2.5">
+              {SOCIALS.map(({ id, label, href }) => {
+                const Icon = SOCIAL_ICONS[id];
+                return (
+                  <a key={id} href={href} aria-label={label} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-[14px] transition hover:border-yolk-400 hover:bg-yolk-400 hover:text-ink">
+                    <Icon />
+                  </a>
+                );
+              })}
+              <a href={whatsappLink()} target="_blank" rel="noreferrer" aria-label="WhatsApp" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-[15px] transition hover:border-yolk-400 hover:bg-yolk-400 hover:text-ink">
+                <FaWhatsapp />
               </a>
             </div>
           </div>
 
-          {/* Col 2 */}
-          <div className="xl:px-8 xl:border-r xl:border-white/20">
-            <h4 className="text-[16px] font-bold mb-4 text-[#F2C45B]">
-              Navigation
-            </h4>
+          <nav aria-label="Liens du pied de page">
+            <h3 className="text-[12px] font-bold uppercase tracking-[0.2em] text-yolk-400">Navigation</h3>
+            <ul className="mt-5 space-y-3">
+              {NAV_LINKS.map((l) => (
+                <li key={l.id}>
+                  <a href={`#${l.id}`} className="group inline-flex items-center gap-1.5 text-[15px] text-white/70 transition hover:text-white">
+                    {l.label}
+                    <LuArrowUpRight className="text-[13px] opacity-0 transition group-hover:opacity-100" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-            <div className="space-y-1.5 text-white/80 text-[13px] leading-6">
-              <a href="#home" className="block hover:text-white transition">
-                Accueil
-              </a>
-              <a href="#about" className="block hover:text-white transition">
-                À propos
-              </a>
-              <a href="#activities" className="block hover:text-white transition">
-                Nos activités
-              </a>
-              <a href="#products" className="block hover:text-white transition">
-                Nos produits
-              </a>
-              <a href="#gallery" className="block hover:text-white transition">
-                Galerie
-              </a>
-              <a href="#contact" className="block hover:text-white transition">
-                Contact
-              </a>
-            </div>
-          </div>
-
-          {/* Col 3 */}
-          <div className="xl:px-8 xl:border-r xl:border-white/20">
-            <h4 className="text-[16px] font-bold mb-4 text-[#F2C45B]">
-              Nos activités
-            </h4>
-
-            <div className="space-y-2 text-white/80 text-[13px]">
-              <div className="flex items-start gap-2">
-                <FaCheckCircle className="mt-1 text-[11px] text-white/80 shrink-0" />
-                <p>Unité de ponte (œufs frais)</p>
-              </div>
-              <div className="flex items-start gap-2">
-                <FaCheckCircle className="mt-1 text-[11px] text-white/80 shrink-0" />
-                <p>Élevage de volaille (poulets, coquelets)</p>
-              </div>
-              <div className="flex items-start gap-2">
-                <FaCheckCircle className="mt-1 text-[11px] text-white/80 shrink-0" />
-                <p>Commercialisation</p>
-              </div>
-              <div className="flex items-start gap-2">
-                <FaCheckCircle className="mt-1 text-[11px] text-white/80 shrink-0" />
-                <p>Livraison gratuite</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Col 4 */}
-          <div className="xl:pl-8">
-            <h4 className="text-[16px] font-bold mb-4 text-[#F2C45B]">
-              Contact
-            </h4>
-
-            <div className="space-y-3 text-white/80 text-[13px]">
-              <div className="flex items-start gap-3">
-                <FaPhoneAlt className="mt-1 text-[12px] shrink-0" />
-                <p>077 75 14 00</p>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <FaMapMarkerAlt className="mt-1 text-[12px] shrink-0" />
-                <p>Akanda, Gabon</p>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <FaEnvelope className="mt-1 text-[12px] shrink-0" />
-                <p>contact@lamarcadele.ga</p>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <FaClock className="mt-1 text-[12px] shrink-0" />
-                <p>Lun - Sam : 7h00 - 18h00</p>
-              </div>
-            </div>
+          <div>
+            <h3 className="text-[12px] font-bold uppercase tracking-[0.2em] text-yolk-400">Contact</h3>
+            <ul className="mt-5 space-y-3 text-[15px] text-white/70">
+              <li>
+                <a href={`tel:${PHONE_TEL}`} className="transition hover:text-white">{PHONE_DISPLAY}</a>
+              </li>
+              <li>
+                <a href={`mailto:${EMAIL}`} className="transition hover:text-white">{EMAIL}</a>
+              </li>
+              <li>{ADDRESS}</li>
+              <li>{HOURS}</li>
+            </ul>
           </div>
         </div>
 
-        <div className="border-t border-white/10 py-3 text-center text-white/60 text-[12px]">
-          © 2026 Ferme Avicole La Marcadèle — Tous droits réservés
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-white/10 py-6 text-[13px] text-white/45 sm:flex-row">
+          <p>© {new Date().getFullYear()} Ferme Avicole La Marcadèle — Tous droits réservés</p>
+          <a href="#home" className="inline-flex items-center gap-2 transition hover:text-white">
+            Retour en haut <LuArrowUp />
+          </a>
         </div>
       </div>
     </footer>

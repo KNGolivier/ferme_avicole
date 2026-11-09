@@ -1,141 +1,137 @@
-import React from "react";
-import { FaLeaf, FaPhoneAlt, FaEgg, FaTruck, FaDrumstickBite } from "react-icons/fa";
-import heroMain from "../assets/hero-eggs.jpg";
+import { LuArrowRight, LuTruck, LuShieldCheck, LuLeaf, LuStar } from "react-icons/lu";
+import { FaWhatsapp, FaEgg } from "react-icons/fa";
 import chickens from "../assets/chickens.jpg";
-import heroBg from "../assets/hero.png";
+import eggs from "../assets/hero-eggs.jpg";
+import { DELIVERY_ZONES, whatsappLink } from "../data/site";
+
+const HIGHLIGHTS = [
+  { icon: LuLeaf, label: "Produits frais et locaux" },
+  { icon: LuShieldCheck, label: "Élevage contrôlé" },
+  { icon: LuTruck, label: "Livraison gratuite" },
+];
+
+function RotatingBadge() {
+  return (
+    <div className="relative h-[118px] w-[118px] md:h-[132px] md:w-[132px]">
+      <svg viewBox="0 0 120 120" className="absolute inset-0 h-full w-full animate-spin-slow" aria-hidden="true">
+        <defs>
+          <path id="badge-circle" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" />
+        </defs>
+        <text className="fill-ink text-[10.5px] font-bold uppercase" style={{ letterSpacing: "0.22em" }}>
+          <textPath href="#badge-circle">Élevé au Gabon • Depuis 2017 •</textPath>
+        </text>
+      </svg>
+      <div className="absolute inset-[30px] flex items-center justify-center rounded-full bg-yolk-500 text-ink shadow-lg md:inset-[34px]">
+        <FaEgg className="text-[24px]" />
+      </div>
+    </div>
+  );
+}
 
 export default function Hero() {
   return (
-    <section
-      id="home"
-      className="relative overflow-hidden bg-white pt-4 md:pt-6 lg:pt-8 pb-12 lg:pb-16"
-    >
-      <div className="max-w-[1240px] mx-auto px-4 md:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-6 items-center">
-          {/* LEFT */}
-          <div className="max-w-[580px]">
-            <h1 className="text-[40px] leading-[1.05] sm:text-[52px] md:text-[62px] lg:text-[68px] font-extrabold tracking-[-0.02em] text-[#4C2D12]">
-              Ferme Avicole
-              <br />
-              <span className="text-[#1E7A34]">La Marcadèle</span>
-            </h1>
+    <section id="home" className="relative overflow-hidden pb-16 pt-28 md:pt-32 lg:pb-24 lg:pt-40">
+      {/* Décor */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+        <div className="grain absolute inset-0" />
+        <div className="absolute -right-40 -top-40 h-[560px] w-[560px] rounded-full bg-yolk-200/60 blur-3xl" />
+        <div className="absolute -left-40 top-1/3 h-[420px] w-[420px] rounded-full bg-brand-100/70 blur-3xl" />
+      </div>
 
-            <p className="mt-5 text-[16px] md:text-[17px] leading-7 text-[#4f4f4f] max-w-[520px]">
-              Depuis 2017, nous contribuons à la souveraineté alimentaire du
-              Gabon avec des produits frais, sains et de qualité.
-            </p>
+      <div className="container-site grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
+        {/* Texte */}
+        <div className="lg:col-span-6">
+          <div className="inline-flex animate-pop-in items-center gap-2 rounded-full border border-ink/10 bg-white/70 py-1.5 pl-1.5 pr-4 text-[13px] font-semibold text-ink/75 shadow-soft backdrop-blur">
+            <span className="rounded-full bg-brand-600 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-white">
+              Akanda
+            </span>
+            Ferme Avicole La Marcadèle
+          </div>
 
-            {/* CTA */}
-            <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <a
-                href="#products"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#1E7A34] hover:bg-[#17642b] text-white px-6 py-4 font-semibold transition shadow-sm"
-              >
-                <FaLeaf className="text-sm" />
-                Découvrir nos produits
-              </a>
+          <h1
+            className="mt-7 animate-pop-in font-display text-[46px] font-semibold leading-[0.98] tracking-[-0.035em] text-ink sm:text-[60px] md:text-[72px] xl:text-[80px]"
+            style={{ animationDelay: "80ms" }}
+          >
+            Le goût du{" "}
+            <span className="relative inline-block italic text-brand-600">
+              frais
+              <svg aria-hidden="true" viewBox="0 0 200 20" preserveAspectRatio="none" className="absolute -bottom-1 left-0 h-3 w-full text-yolk-500 md:h-4">
+                <path d="M2 14 C 50 4, 120 4, 198 12" stroke="currentColor" strokeWidth="6" fill="none" strokeLinecap="round" />
+              </svg>
+            </span>
+            ,<br className="hidden sm:block" /> élevé au Gabon.
+          </h1>
 
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center gap-3 rounded-full border border-[#1E7A34] text-[#1E7A34] px-6 py-4 font-semibold hover:bg-green-50 transition"
-              >
-                <FaPhoneAlt className="text-sm" />
-                Nous contacter
-              </a>
-            </div>
+          <p
+            className="mt-7 max-w-[520px] animate-pop-in text-[17px] leading-8 text-ink/65 md:text-[18px]"
+            style={{ animationDelay: "160ms" }}
+          >
+            Depuis 2017, nous contribuons à la souveraineté alimentaire du Gabon avec des œufs et des volailles frais,
+            sains et de qualité.
+          </p>
 
-            {/* Features */}
-            <div className="mt-10 grid sm:grid-cols-3 gap-5">
-              <div className="flex items-start gap-3">
-                <div className="w-11 h-11 rounded-full bg-[#1E7A34] text-white flex items-center justify-center shrink-0">
-                  <FaEgg className="text-sm" />
-                </div>
-                <div>
-                  <h4 className="text-[14px] font-semibold text-[#222] leading-5">
-                    Produits frais
-                  </h4>
-                  <p className="text-[13px] text-[#666] leading-5">et locaux</p>
-                </div>
-              </div>
+          <div className="mt-9 flex animate-pop-in flex-col gap-3 sm:flex-row" style={{ animationDelay: "240ms" }}>
+            <a href={whatsappLink()} target="_blank" rel="noreferrer" className="btn-primary group">
+              <FaWhatsapp className="text-[18px]" />
+              Commander sur WhatsApp
+            </a>
+            <a href="#products" className="btn-ghost group">
+              Voir nos produits
+              <LuArrowRight className="transition-transform group-hover:translate-x-1" />
+            </a>
+          </div>
 
-              <div className="flex items-start gap-3">
-                <div className="w-11 h-11 rounded-full bg-[#7A4A18] text-white flex items-center justify-center shrink-0">
-                  <FaDrumstickBite className="text-sm" />
-                </div>
-                <div>
-                  <h4 className="text-[14px] font-semibold text-[#222] leading-5">
-                    Élevage responsable
-                  </h4>
-                  <p className="text-[13px] text-[#666] leading-5">
-                    et contrôlé
-                  </p>
-                </div>
-              </div>
+          <ul className="mt-10 flex animate-pop-in flex-wrap gap-x-6 gap-y-3" style={{ animationDelay: "320ms" }}>
+            {HIGHLIGHTS.map(({ icon: Icon, label }) => (
+              <li key={label} className="flex items-center gap-2.5 text-[14px] font-semibold text-ink/75">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-50 text-brand-600">
+                  <Icon className="text-[15px]" />
+                </span>
+                {label}
+              </li>
+            ))}
+          </ul>
+        </div>
 
-              <div className="flex items-start gap-3">
-                <div className="w-11 h-11 rounded-full bg-[#F3B81B] text-white flex items-center justify-center shrink-0">
-                  <FaTruck className="text-sm" />
-                </div>
-                <div>
-                  <h4 className="text-[14px] font-semibold text-[#222] leading-5">
-                    Livraison gratuite
-                  </h4>
-                  <p className="text-[13px] text-[#666] leading-5">
-                    Libreville, Akanda, Owendo
-                  </p>
-                </div>
-              </div>
+        {/* Visuel */}
+        <div className="relative mx-auto w-full max-w-[560px] animate-pop-in lg:col-span-6 lg:max-w-none" style={{ animationDelay: "200ms" }}>
+          <div className="relative ml-auto aspect-[6/5] w-full overflow-hidden rounded-[40px] shadow-lift lg:w-[94%]">
+            <img
+              src={chickens}
+              alt="Poulets blancs élevés à la ferme La Marcadèle"
+              className="h-full w-full object-cover"
+              fetchPriority="high"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-transparent" />
+          </div>
+
+          {/* Badge rotatif */}
+          <div className="absolute -left-2 -top-10 rounded-full bg-cream p-2 shadow-soft sm:-left-6 lg:-left-2">
+            <RotatingBadge />
+          </div>
+
+          {/* Carte œufs */}
+          <div className="absolute -bottom-8 left-0 flex animate-float items-center gap-3 rounded-3xl bg-white p-3 pr-5 shadow-lift sm:-left-4">
+            <img src={eggs} alt="" className="h-14 w-14 rounded-2xl object-cover md:h-16 md:w-16" />
+            <div>
+              <p className="text-[15px] font-bold text-ink">Œufs frais</p>
+              <p className="flex items-center gap-1 text-[12.5px] text-ink/55">
+                <LuStar className="fill-yolk-500 text-yolk-500" /> Contrôlés régulièrement
+              </p>
             </div>
           </div>
 
-          {/* RIGHT */}
-          <div className="relative min-h-[460px] lg:min-h-[560px] flex items-center justify-center">
-            {/* forme de fond */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-[92%] h-[92%] max-w-[600px] rounded-[45%] bg-[#F5F1EA]"></div>
+          {/* Carte livraison */}
+          <div className="absolute -right-2 top-1/2 hidden animate-float-delayed rounded-3xl bg-brand-700 p-4 text-white shadow-lift sm:block md:-right-6">
+            <div className="flex items-center gap-2 text-[12px] font-bold uppercase tracking-wider text-yolk-300">
+              <LuTruck className="text-[16px]" /> Livraison offerte
             </div>
-
-            {/* image principale */}
-            <div className="relative z-10 w-[320px] h-[320px] sm:w-[380px] sm:h-[380px] md:w-[430px] md:h-[430px] rounded-[42%] overflow-hidden shadow-[0_18px_40px_rgba(0,0,0,0.12)]">
-              <img
-                src={heroMain}
-                alt="Œufs frais"
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            {/* image flottante haut droite */}
-            <div className="absolute z-20 top-2 right-0 sm:right-6 md:right-4 lg:right-0 w-[170px] sm:w-[220px] md:w-[250px] bg-white p-2 shadow-[0_14px_35px_rgba(0,0,0,0.16)] rotate-[8deg]">
-              <img
-                src={chickens}
-                alt="Poules"
-                className="w-full h-[110px] sm:h-[140px] md:h-[160px] object-cover"
-              />
-            </div>
-
-            {/* image flottante bas droite */}
-            <div className="absolute z-20 bottom-4 right-4 sm:right-14 md:right-10 lg:right-6 w-[160px] sm:w-[210px] md:w-[235px] bg-white p-2 shadow-[0_14px_35px_rgba(0,0,0,0.16)] rotate-[-6deg]">
-              <img
-                src={chickens}
-                alt="Volailles"
-                className="w-full h-[105px] sm:h-[130px] md:h-[145px] object-cover"
-              />
-            </div>
-
-            {/* décor bas */}
-            <img
-              src={heroBg}
-              alt=""
-              className="absolute bottom-0 right-0 w-[140px] sm:w-[180px] md:w-[220px] opacity-95"
-            />
-
-            {/* petit accent jaune */}
-            <div className="hidden md:block absolute left-[8%] top-[28%] z-20">
-              <div className="relative w-12 h-12">
-                <span className="absolute w-8 h-[4px] rounded-full bg-[#F2B81B] rotate-[25deg] top-4 left-2"></span>
-                <span className="absolute w-8 h-[4px] rounded-full bg-[#F2B81B] rotate-[-25deg] top-6 left-2"></span>
-                <span className="absolute w-[4px] h-8 rounded-full bg-[#F2B81B] rotate-[15deg] top-2 left-5"></span>
-              </div>
+            <div className="mt-2 flex flex-col gap-1">
+              {DELIVERY_ZONES.map((zone) => (
+                <span key={zone} className="text-[14px] font-semibold">
+                  {zone}
+                </span>
+              ))}
             </div>
           </div>
         </div>

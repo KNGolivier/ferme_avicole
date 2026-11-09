@@ -1,60 +1,95 @@
-import React from "react";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
+import { LuTruck } from "react-icons/lu";
 import eggsImg from "../assets/hero-eggs.jpg";
 import chickensImg from "../assets/chickens.jpg";
+import SectionHeading from "./ui/SectionHeading";
+import Reveal from "./ui/Reveal";
+import { whatsappLink } from "../data/site";
+
+const PRODUCTS = [
+  {
+    title: "Œufs frais",
+    tag: "Ponte",
+    text: "Des œufs frais en plateaux, contrôlés régulièrement.",
+    image: eggsImg,
+    zoom: "",
+  },
+  {
+    title: "Poulets blancs",
+    tag: "Volaille",
+    text: "Une viande tendre et savoureuse, élevée localement.",
+    image: chickensImg,
+    zoom: "",
+  },
+  {
+    title: "Poules rousses",
+    tag: "Volaille",
+    text: "Des poules élevées avec soin, au goût authentique.",
+    image: chickensImg,
+    // Recadrage sur la poule tachetée en bas à gauche de la photo
+    zoom: "scale-[2.1] origin-[4%_88%]",
+  },
+  {
+    title: "Coquelets",
+    tag: "Volaille",
+    text: "De jeunes volailles parfaites pour vos repas en famille.",
+    image: chickensImg,
+    // Recadrage sur le groupe en haut à droite
+    zoom: "scale-[1.9] origin-[95%_45%]",
+  },
+];
 
 export default function Products() {
-  const products = [
-    { id: 1, image: eggsImg, title: "Œufs frais" },
-    { id: 2, image: chickensImg, title: "Poulets blancs" },
-    { id: 3, image: chickensImg, title: "Poules rousses" },
-    { id: 4, image: chickensImg, title: "Élevage intérieur" },
-  ];
-
   return (
-    <section id="products" className="py-14 md:py-16 bg-white">
-      <div className="max-w-[1240px] mx-auto px-4 md:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-[760px] mx-auto mb-8 md:mb-10">
-          <p className="text-[#1E7A34] uppercase tracking-[0.18em] text-[12px] md:text-[13px] font-bold mb-2">
-            Nos produits
-          </p>
-
-          <h2 className="text-[#1F1F1F] text-[30px] sm:text-[36px] md:text-[42px] leading-[1.15] font-extrabold">
-            Des produits frais et de qualité
-          </h2>
+    <section id="products" className="py-24 md:py-32">
+      <div className="container-site">
+        <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
+          <SectionHeading
+            align="left"
+            eyebrow="Nos produits"
+            title="Des produits frais et de qualité"
+            text="Commandez en un message : nous vous confirmons la disponibilité et nous livrons gratuitement."
+          />
+          <Reveal className="flex shrink-0 items-center gap-3 rounded-full bg-yolk-100 px-5 py-3 text-[14px] font-semibold text-earth-800">
+            <LuTruck className="text-[18px]" />
+            Livraison offerte à Libreville, Akanda et Owendo
+          </Reveal>
         </div>
 
-        {/* Slider visual */}
-        <div className="flex items-center justify-center gap-4 lg:gap-5">
-          {/* Left arrow */}
-          <button className="hidden md:flex w-11 h-11 rounded-full bg-[#1E7A34] hover:bg-[#17642b] text-white items-center justify-center shrink-0 transition">
-            <FaArrowLeft className="text-[12px]" />
-          </button>
-
-          {/* Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 w-full max-w-[1040px]">
-            {products.map((product) => (
-              <div
-                key={product.id}
-                className="rounded-[14px] overflow-hidden bg-white"
-              >
-                <div className="h-[160px] md:h-[170px] lg:h-[165px]">
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="w-full h-full object-cover"
-                  />
+        <div className="no-scrollbar -mx-4 mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 md:mt-14 lg:mx-0 lg:grid lg:grid-cols-4 lg:overflow-visible lg:px-0">
+          {PRODUCTS.map((p, i) => (
+            <Reveal
+              key={p.title}
+              as="article"
+              delay={i * 90}
+              className="group flex w-[78%] shrink-0 snap-start flex-col overflow-hidden rounded-[28px] border border-ink/10 bg-white transition duration-500 hover:-translate-y-1 hover:shadow-lift sm:w-[46%] lg:w-auto"
+            >
+              <div className="relative aspect-[4/3] overflow-hidden bg-sand">
+                <div className="h-full w-full transition duration-700 group-hover:scale-110">
+                  <img src={p.image} alt={p.title} loading="lazy" className={`h-full w-full object-cover ${p.zoom}`} />
                 </div>
+                <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-[11.5px] font-bold uppercase tracking-wider text-brand-700 backdrop-blur">
+                  {p.tag}
+                </span>
               </div>
-            ))}
-          </div>
 
-          {/* Right arrow */}
-          <button className="hidden md:flex w-11 h-11 rounded-full bg-[#1E7A34] hover:bg-[#17642b] text-white items-center justify-center shrink-0 transition">
-            <FaArrowRight className="text-[12px]" />
-          </button>
+              <div className="flex flex-1 flex-col p-6">
+                <h3 className="font-display text-[22px] font-semibold text-ink">{p.title}</h3>
+                <p className="mt-2 flex-1 text-[14.5px] leading-6 text-ink/60">{p.text}</p>
+                <a
+                  href={whatsappLink(`Bonjour La Marcadèle, je souhaite commander : ${p.title}.`)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-brand-50 px-5 py-3 text-[14px] font-bold text-brand-700 transition hover:bg-brand-600 hover:text-white"
+                >
+                  <FaWhatsapp className="text-[16px]" />
+                  Commander
+                </a>
+              </div>
+            </Reveal>
+          ))}
         </div>
+        <p className="mt-2 text-center text-[13px] text-ink/45 lg:hidden">← Faites glisser pour voir plus →</p>
       </div>
     </section>
   );
